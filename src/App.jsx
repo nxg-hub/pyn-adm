@@ -5,6 +5,10 @@ import Dashboard from "./pages/Dashboard/Index";
 import Users from "./pages/Dashboard/routes/users/Users";
 import Accounts from "./pages/Dashboard/routes/Accounts/Accounts";
 import Home from "./pages/Dashboard/routes/Home/Home";
+import Dashboard from "./pages/Dashboard/Index";
+import Users from "./pages/Dashboard/routes/users/Users";
+import Accounts from "./pages/Dashboard/routes/Accounts/Accounts";
+import Home from "./pages/Dashboard/routes/Home/Home";
 
 function App() {
   return (
