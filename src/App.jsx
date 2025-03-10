@@ -1,14 +1,11 @@
 import { Route, Routes } from "react-router-dom";
 import Login from './pages/Login'
 import SignUp from "./pages/Signup";
-import Dashboard from "./pages/Dashboard/Index";
 import Users from "./pages/Dashboard/routes/users/Users";
 import Accounts from "./pages/Dashboard/routes/Accounts/Accounts";
 import Home from "./pages/Dashboard/routes/Home/Home";
 import Dashboard from "./pages/Dashboard/Index";
-import Users from "./pages/Dashboard/routes/users/Users";
-import Accounts from "./pages/Dashboard/routes/Accounts/Accounts";
-import Home from "./pages/Dashboard/routes/Home/Home";
+
 
 function App() {
   return (
