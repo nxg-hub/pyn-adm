@@ -24,11 +24,16 @@ const SignUpForm = () => {
       firstName: values.firstName,
       lastName: values.lastName,
       password: values.password,
-      confirmPassword: values.confirmPassword
+      confirmPassword: values.confirmPassword,
+      phoneNumber: values.phoneNumber,
+      userType: "SUPER_ADMIN"
     };
     setErrorMessage('');
+
+    const url = `${import.meta.env.VITE_REGISTER_SUPER_ADMIN_ENDPOINT}?secretKey=${import.meta.env.VITE_API_KEY}`;
+
     try {
-      const response = await fetch(import.meta.env.VITE_REGISTER_ADMIN_ENDPOINT, {
+      const response = await fetch(url, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -45,7 +50,7 @@ if (result.debugMessage === "User already exists") {
     navigate("/");
   } else {
     const debugMessage = result.debugMessage || "An error occurred";
-    setErrorMessage(`Failed to log in: ${debugMessage}`);
+    setErrorMessage(`Failed to sign in: ${debugMessage}`);
   }
 } catch (error) {
   setErrorMessage(`Error signing up: ${error.message}`);
@@ -65,7 +70,7 @@ if (result.debugMessage === "User already exists") {
       </div> */}
       <div className="bg-white flex flex-col justify-center items-start mx-auto py-6">
         <Formik
-          initialValues={{ email: '', firstName: '', lastName: '' ,password: '', confirmPassword: '' }}
+          initialValues={{ email: '', firstName: '', lastName: '' , password: '', confirmPassword: '', phoneNumber: '' }}
           validationSchema={SignUpSchema}
           onSubmit={handleSubmit}>
           {() => (
@@ -110,6 +115,18 @@ if (result.debugMessage === "User already exists") {
                   />
                   <ErrorMessage name="lastName" component="span" className="text-[#db3a3a]" />
                 </div>
+                <div className="xl:w-[120%] flex flex-col space-y-2">
+                  <label htmlFor="phoneNumber" className="text-sm font-normal text-[#006181]">
+                    Phone Number
+                  </label>
+                  <Field
+                    name="phoneNumber"
+                    type="text"
+                    placeholder="Enter Phone Number"
+                    className="w-full h-[3.4rem] border border-[#9ca3af] outline-none font-light text-base text-gray rounded-[5px] py-2 px-[10px]"
+                  />
+                  <ErrorMessage name="phoneNumber" component="span" className="text-[#db3a3a]" />
+                </div>
                 <div className="xl:w-[120%] flex flex-col space-y-2 relative">
                   <label htmlFor="password" className="text-sm font-normal text-[#006181]">
                     Password
@@ -120,8 +137,17 @@ if (result.debugMessage === "User already exists") {
                     placeholder="Enter Password"
                     className="w-full h-[3.4rem] border border-[#9ca3af] outline-none font-light text-base text-gray rounded-[5px] py-2 px-[10px]"
                   />
+                  
                   <ErrorMessage name="password" component="span" className="text-[#db3a3a]" />
-                  <div className="xl:w-[120%] flex flex-col space-y-2">
+                  {showPassword ? (
+                    <BsEye onClick={handleShowPassword} className="absolute top-10 right-1" />
+                  ) : (
+                    <BsEyeSlash onClick={handleShowPassword} className="absolute top-10 right-1" />
+                  )}
+                
+                  </div>
+                  
+                  <div className="xl:w-[120%] flex flex-col space-y-2 relative">
                   <label htmlFor="password2" className="text-sm font-normal text-[#006181]">
                     Confirm Password
                   </label>
@@ -133,12 +159,7 @@ if (result.debugMessage === "User already exists") {
                   />
                   <ErrorMessage name="confirmPassword" component="span" className="text-[#db3a3a]" />
                 </div>
-                  {showPassword ? (
-                    <BsEye onClick={handleShowPassword} className="absolute top-10 right-1" />
-                  ) : (
-                    <BsEyeSlash onClick={handleShowPassword} className="absolute top-10 right-1" />
-                  )}
-                </div>
+                
 
                 {errorMessage && <div className="text-[#db3a3a]">{errorMessage}</div>}
                 <button
@@ -148,12 +169,7 @@ if (result.debugMessage === "User already exists") {
                   {isLoading ? 'Loading...' : 'Sign Up'}
                 </button>
               </div>
-              <p className="text-center text-[#006181]">
-                Already have an admin account?
-                <Link to="/" className="px-2">
-                  <a className="text-blue-600 underline">Log in</a>
-                </Link>
-              </p>
+              
             </Form>
           )}
         </Formik>
