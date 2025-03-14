@@ -3,13 +3,18 @@ import logo from '../../../assets/images/logo.png'
 import { LoginSchema } from '../schema/schema';
 import { useState } from 'react';
 import { BsEye, BsEyeSlash } from 'react-icons/bs';
-import { Link } from 'react-router-dom';
-
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { fetchUser } from '../../../Redux/UserSlice';
 
 const LoginForm = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+
 
 
   const handleShowPassword = () => {
@@ -23,9 +28,12 @@ const LoginForm = () => {
       email: values.email,
       password: values.password,
     };
+
+    localStorage.setItem('email', values.email);
+
     setErrorMessage('');
     try {
-      const response = await fetch(import.meta.env.VITE_LOGIN_USER_ENDPOINT, {
+      const response = await fetch(import.meta.env.VITE_LOGIN_ADMIN_ENDPOINT, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -39,15 +47,10 @@ const LoginForm = () => {
         const token = result?.data;
 
         if (token) {
-          setAuthToken(token);
-          // dispatch(setToken(token));
-          const decodedString = decodeJWT(token);
-          setuserDetails(decodedString);
-          localStorage.setItem('authToken', token);
+          localStorage.setItem('token', token);
 
-          await auth.checkUserRegistrationLevel(); // Trigger the redirection after login
-        } else {
-          setErrorMessage('Login failed: Invalid token structure');
+        dispatch(fetchUser(values.email));
+          navigate("/dashboard");
         }
       } else {
         const message = result.message;

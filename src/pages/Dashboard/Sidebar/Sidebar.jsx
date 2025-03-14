@@ -1,12 +1,18 @@
 import React from "react";
 import logo from "../../../assets/logo.png";
+import { useSelector } from 'react-redux';
 import { Link, useLocation } from "react-router-dom";
 import { FaRegUserCircle } from "react-icons/fa";
 import { MdAccountBalance } from "react-icons/md";
 import { RxDashboard } from "react-icons/rx";
+import { HiUserAdd } from "react-icons/hi";   // Human add icon
+
+
 const Sidebar = () => {
   const location = useLocation();
+  const user = useSelector((state) => state.user.user);
   const currentRoute = location.pathname;
+
   const sideBarItems = [
     {
       path: "/Dashboard",
@@ -23,7 +29,16 @@ const Sidebar = () => {
       name: "Accounts",
       icon: <MdAccountBalance size={24} />,
     },
-  ];
+  ] 
+    if (user?.adminUserType === "SUPER_ADMIN") {
+      sideBarItems.push({
+        path: "/Dashboard/AdminInvite",
+        name: "Invite an Admin",
+        icon: <HiUserAdd size={24} />,
+      });
+    }
+  
+  
   return (
     <div className="bg-secondary ">
       <nav className="bg-[#CCDFE6] w-24 md:w-60 h-screen p-4 text-primary font-bold">
@@ -31,6 +46,7 @@ const Sidebar = () => {
           <img className="h-[100px]" src={logo} alt="logo" />
         </div>
         <ul>
+
           {sideBarItems.map((item, i) => {
             return (
               <li key={i} className="mb-2">
