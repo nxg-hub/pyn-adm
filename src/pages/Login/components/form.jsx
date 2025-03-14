@@ -125,12 +125,8 @@ const LoginForm = () => {
                   {isLoading ? 'Logging in...' : 'Log in'}
                 </button>
               </div>
-              <p className="text-center text-[#006181]">
-                Don't have an admin account?
-                <Link to="/SignUp" className="px-2">
-                  <a className="text-blue-600 underline">Sign Up</a>
-                </Link>
-              </p>
+             
+              
             </Form>
           )}
         </Formik>
