@@ -3,6 +3,7 @@ import { CompleteRegSchema } from '../schema';
 import { useState } from 'react';
 import { BsEye, BsEyeSlash } from 'react-icons/bs';
 import { Link, useNavigate } from 'react-router-dom';
+import InputField from './input-field';
 
 const CompleteRegForm = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -70,7 +71,7 @@ const CompleteRegForm = () => {
         Complete your registration 
       </div>
       <div className="bg-white flex flex-col justify-center items-start mx-auto py-6">
-        <Formik
+        <Formik 
           initialValues={{ firstName: '', lastName: '' , password: '', confirmPassword: '', phoneNumber: '' }}
           validationSchema={CompleteRegSchema}
           onSubmit={handleSubmit}>
@@ -109,7 +110,7 @@ const CompleteRegForm = () => {
                   <Field
                     name="phoneNumber"
                     type="text"
-                    placeholder="Enter Phone Number"
+                    placeholder="Enter Phone Number"  
                     className="w-full h-[3.4rem] border border-[#9ca3af] outline-none font-light text-base text-gray rounded-[5px] py-2 px-[10px]"
                   />
                   <ErrorMessage name="phoneNumber" component="span" className="text-[#db3a3a]" />
