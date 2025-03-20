@@ -3,7 +3,6 @@ import { CompleteRegSchema } from '../schema';
 import { useState } from 'react';
 import { BsEye, BsEyeSlash } from 'react-icons/bs';
 import { Link, useNavigate } from 'react-router-dom';
-import InputField from './input-field';
 
 const CompleteRegForm = () => {
   const [isLoading, setIsLoading] = useState(false);

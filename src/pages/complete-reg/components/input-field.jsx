@@ -13,6 +13,7 @@ const InputField = ({ label, name, type, placeholder }) => {
         placeholder={placeholder}
         className="w-full h-[3.4rem] border border-[#9ca3af] outline-none font-light text-base text-gray rounded-[5px] py-2 px-[10px]"
       />
+      
       <ErrorMessage name={name} component="span" className="text-[#db3a3a]" />
     </div>
   );
