@@ -6,6 +6,8 @@ import { BsEye, BsEyeSlash } from 'react-icons/bs';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { fetchUser } from '../../../Redux/UserSlice';
+import { fetchCustomer } from "../../../Redux/CustomerSlice";
+
 
 const LoginForm = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -50,6 +52,8 @@ const LoginForm = () => {
           localStorage.setItem('token', token);
 
         dispatch(fetchUser(values.email));
+        dispatch(fetchCustomer())
+
           navigate("/dashboard");
         }
       } else {

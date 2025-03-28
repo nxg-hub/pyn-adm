@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { useSelector } from 'react-redux';
-
+// import InputField from "../../../complete-reg/components/input-field";
 
 const AdminInvite = () => {
 const [isLoading, setIsLoading] = useState(false);
@@ -93,6 +93,8 @@ return (
                     <ErrorMessage name="adminUserType" component="span" className="text-[#db3a3a] text-xs mt-1" />
                   </div>
                 </div>
+
+
                 {successMessage && (
                           <div className="item-added-box border border-blue-100 bg-blue-100 rounded-lg p-4 mt-4 text-blue-700 max-w-md mx-auto shadow-md">
                             <p className="mt-2 text-lightBlue font-bold">{successMessage}</p>
@@ -118,3 +120,55 @@ return (
 };
 
 export default AdminInvite;
+
+//  import InputField from "../../../complete-reg/components/input-field";
+
+//  import { Formik, Form } from "formik";
+// import * as Yup from "yup";
+
+// const AdminInvite = () => {
+//   return (
+//     <Formik
+//       initialValues={{
+//         fullName: "",
+//         email: "",
+//         password: "",
+//       }}
+//       validationSchema={Yup.object({
+//         fullName: Yup.string().required("Full Name is required"),
+//         email: Yup.string().email("Invalid email").required("Email is required"),
+//         password: Yup.string().min(6, "Must be at least 6 characters").required("Password is required"),
+//       })}
+//       onSubmit={(values) => {
+//         console.log("Form Submitted:", values);
+//       }}
+//     >
+//       {({ isSubmitting }) => (
+//         <Form className="w-full max-w-md p-6 bg-white shadow-md rounded-md">
+//           <h2 className="text-lg font-semibold mb-4">Sign Up</h2>
+
+//           {/* Full Name Input */}
+//           <InputField label="Full Name" name="fullName" type="text" placeholder="Enter your full name" />
+
+//           {/* Email Input */}
+//           <InputField label="Email" name="email" type="email" placeholder="Enter your email" />
+
+//           {/* Password Input */}
+//           <InputField label="Password" name="password" type="password" placeholder="Enter your password" />
+
+//           <button
+//             type="submit"
+//             disabled={isSubmitting}
+//             className="w-full mt-4 bg-[#006181] text-white py-2 px-4 rounded-md hover:bg-[#004a5e] transition"
+//           >
+//             {isSubmitting ? "Submitting..." : "Submit"}
+//           </button>
+//         </Form>
+//       )}
+//     </Formik>
+//   );
+// };
+
+// export default AdminInvite;
+
+

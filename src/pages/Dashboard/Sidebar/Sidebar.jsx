@@ -40,7 +40,7 @@ const Sidebar = () => {
   
   
   return (
-    <div className="bg-secondary ">
+    <div className=" sticky top-0 left-0 h-screen bg-secondary ">
       <nav className="bg-[#CCDFE6] w-24 md:w-60 h-screen p-4 text-primary font-bold">
         <div className="mb-5">
           <img className="h-[100px]" src={logo} alt="logo" />
