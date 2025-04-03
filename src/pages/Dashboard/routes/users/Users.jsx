@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 import { useState, useEffect } from "react";
 import { DataTable } from "../../../../R-U_components/Table/data-table";
 import SearchBar from "../../../../R-U_components/Searchbar/search-bar";
@@ -115,6 +116,73 @@ const Users = () => {
         actionColumn={{ title: "Actions" }} 
         />
       )}
+=======
+import React, { useState } from "react";
+
+
+const Users = () => {
+  const [users, setUsers] = useState([]);
+  const [errorMessage, setErrorMessage] = useState("");
+  
+
+  const fetchAllUsers = async () => {
+    setErrorMessage(''); // Clear previous errors
+    try {
+      const response = await fetch(import.meta.env.VITE_ALL_USERS, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json', 
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const contentType = response.headers.get("content-type");
+      if (contentType && contentType.includes("application/json")) {
+        const data = await response.json();
+        setUsers(data); // Update state with fetched users
+      } else {
+        throw new Error("Non-JSON response from server.");
+      }
+    } catch (error) {
+      setErrorMessage(`Error fetching users: ${error.message}`);
+    }
+  };
+
+  return (
+    <div className="text-center">
+      <div>Users</div>
+      <button
+        type="submit"
+        className="text-[#006181] mt-5 text-sm flex justify-center items-center rounded-md bg-yellow-400 px-3 py-2 font-bold w-[30%] ml-0 !mb-4 hover:cursor-pointer transition"
+        onClick={fetchAllUsers}
+      >
+        All Users
+      </button>
+
+      {errorMessage && <p className="text-red-500">{errorMessage}</p>}
+
+      <div className="mt-4">
+        {users.length > 0 ? (
+          <ul>
+            {users.map((user) => (
+              <li key={user.id} className="border-b py-2">
+                <strong>Name:</strong> {user.firstName} {user.lastName} <br />
+                <strong>Email:</strong> {user.email} <br />
+                <strong>Phone:</strong> {user.phoneNumber} <br />
+                <strong>User Type:</strong> {user.userType} <br />
+                <strong>Tier Level:</strong> {user.tierLevel}
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p>No users found.</p>
+        )}
+      </div>
+>>>>>>> Stashed changes
     </div>
   );
 };
