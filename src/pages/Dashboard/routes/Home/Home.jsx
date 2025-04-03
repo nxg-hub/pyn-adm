@@ -1,9 +1,11 @@
 import React from "react";
+import {RxChevronRight} from "react-icons/rx";
+import SearchBar from "../../../../Buttons/Search.jsx";
+import Modals from "../../../../modal/Sucess.jsx";
 
 const Home = () => {
   return (
     <div>
-      {/*<h1>Home</h1>*/}
 
       {/* Breadcrumbs */}
       <div style={{ display: "inline-flex", gap: "0.5rem", alignItems: "center" }}>
@@ -20,13 +22,12 @@ const Home = () => {
       <SearchBar placeholder="Search here..." />
 
       {/* About Section */}
-      <About />
+      {/*<About />*/}
 
       {/* Modals Section */}
       <Modals /> {/* Render the Modals component here */}
     </div>
   );
-  // return <div>Home</div>;
 };
 
 export default Home;
