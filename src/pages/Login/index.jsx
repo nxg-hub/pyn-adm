@@ -6,7 +6,7 @@ import LoginForm from './components/form';
 const Login = () => {
   return (
     <div className="bg-black h-screen overflow-x-hidden">
-      <Logo />
+      {/*<Logo />*/}
       <LoginForm />
     </div>
   );

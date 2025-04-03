@@ -1,71 +1,106 @@
-import React from "react";
-import logo from "../../../assets/logo.png";
-import { useSelector } from 'react-redux';
-import { Link, useLocation } from "react-router-dom";
-import { FaRegUserCircle } from "react-icons/fa";
-import { MdAccountBalance } from "react-icons/md";
-import { RxDashboard } from "react-icons/rx";
-import { HiUserAdd } from "react-icons/hi";   // Human add icon
+import { useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { FaRegUserCircle } from 'react-icons/fa';
+import { MdAccountBalance, MdVerified } from 'react-icons/md';
+import { RxDashboard } from 'react-icons/rx';
+import { HiUserAdd } from 'react-icons/hi';
+import { TbSettings } from 'react-icons/tb';
+import { VscSignOut } from 'react-icons/vsc';
+import avatar from '../../../assets/avatar.png';
 
-
-const Sidebar = () => {
+const Sidebar = ({ openModal }) => {
   const location = useLocation();
-  const user = useSelector((state) => state.user.user);
+  const navigate = useNavigate();
   const currentRoute = location.pathname;
+  // const [toggle, setToggle] = useState(false);
+
+  const handleLogout = () => {
+    localStorage.clear();
+    navigate('/login');
+  };
 
   const sideBarItems = [
     {
       path: "/Dashboard",
       name: "Dashboard",
-      icon: <RxDashboard size={24} />,
+      icon: <RxDashboard size={22} />,
     },
     {
       path: "/Dashboard/Users",
       name: "Users",
-      icon: <FaRegUserCircle size={24} />,
+      icon: <FaRegUserCircle size={22} />,
     },
     {
       path: "/Dashboard/Accounts",
       name: "Accounts",
-      icon: <MdAccountBalance size={24} />,
+      icon: <MdAccountBalance size={22} />,
     },
-  ] 
-    if (user?.adminUserType === "SUPER_ADMIN") {
-      sideBarItems.push({
-        path: "/Dashboard/AdminInvite",
-        name: "Invite an Admin",
-        icon: <HiUserAdd size={24} />,
-      });
+    {
+      path: "/Dashboard/AdminInvite",
+      name: "Invite an Admin",
+      icon: <HiUserAdd size={22} />,
     }
-  
-  
-  return (
-    <div className=" sticky top-0 left-0 h-screen bg-secondary ">
-      <nav className="bg-[#CCDFE6] w-24 md:w-60 h-screen p-4 text-primary font-bold">
-        <div className="mb-5">
-          <img className="h-[100px]" src={logo} alt="logo" />
-        </div>
-        <ul>
+  ];
 
-          {sideBarItems.map((item, i) => {
-            return (
-              <li key={i} className="mb-2">
-                <Link
-                  to={item.path}
-                  className={` text-sm   hover:text-blue-500 ${
-                    currentRoute === item.path ? "text-blue-500 " : ""
-                  }  block p-2 rounded`}>
-                  <div className="flex items-center gap-2 md:text-xl">
-                    <span>{item?.icon}</span>
-                    <span className="hidden md:block">{item.name}</span>
-                  </div>
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
-      </nav>
-    </div>
+  return (
+      <div
+          style={{
+            overflowY: 'auto',
+            scrollbarWidth: 'none',
+            msOverflowStyle: 'none',
+          }}
+          className="bg-[#CCDFE6] fixed left-0 top-[5.5rem] w-[312px] h-[calc(100vh-5.5rem)] overflow-y-auto rounded-[10px] px-4 py-4 xl:block hidden scrollbar"
+      >
+        <div className="space-y-[52px] flex flex-col w-full pb-20">
+          <div className="flex flex-col justify-center items-center">
+            <div className="mb-20">
+              <img src={avatar} alt="profile image" className="w-24 h-24 rounded-full" />
+              <div className="font-semibold text-xl mt-2">Hi, User</div>
+              <div
+                  onClick={openModal}
+                  className="flex items-center space-x-1 text-red-500 mt-2 justify-center cursor-pointer"
+              >
+                {/* <MdVerified size={16} />
+                <span className="text-sm">Verify Now</span> */}
+              </div>
+            </div>
+            <div className="space-y-[52px] flex flex-col w-full">
+              {sideBarItems.map((item, i) => (
+                  <Link
+                      key={i}
+                      to={item.path}
+                      className={`flex items-center space-x-6 ${
+                          currentRoute === item.path ? '!ml-3 font-bold text-lightBlue' : ''
+                      }`}
+                  >
+                    {item.icon}
+                    <span className="hover:text-lightBlue ease transition-colors">{item.name}</span>
+                  </Link>
+              ))}
+
+              <Link
+                  to="/account/settings"
+                  className={`flex items-center space-x-6 ${
+                      currentRoute === '/account/settings' ? '!ml-3 font-bold text-lightBlue' : ''
+                  }`}
+              >
+                <TbSettings size={22} />
+                <span className="hover:text-lightBlue ease transition-colors">Account Settings</span>
+              </Link>
+
+              <button
+                  onClick={handleLogout}
+                  className={`!mt-[10rem] flex items-center space-x-6 ${
+                      currentRoute === '/' ? '!ml-3 font-bold text-lightBlue' : ''
+                  }`}
+              >
+                <VscSignOut size={22} />
+                <span className="hover:text-lightBlue ease transition-colors">Sign Out</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
   );
 };
 
