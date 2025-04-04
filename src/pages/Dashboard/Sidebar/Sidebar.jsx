@@ -6,11 +6,14 @@ import { RxDashboard } from 'react-icons/rx';
 import { HiUserAdd } from 'react-icons/hi';
 import { TbSettings } from 'react-icons/tb';
 import { VscSignOut } from 'react-icons/vsc';
+import { useSelector } from 'react-redux';
 import avatar from '../../../assets/avatar.png';
 
 const Sidebar = ({ openModal }) => {
   const location = useLocation();
   const navigate = useNavigate();
+  const user = useSelector((state) => state.user.user);
+
   const currentRoute = location.pathname;
   // const [toggle, setToggle] = useState(false);
 
@@ -35,12 +38,14 @@ const Sidebar = ({ openModal }) => {
       name: "Accounts",
       icon: <MdAccountBalance size={22} />,
     },
-    {
-      path: "/Dashboard/AdminInvite",
-      name: "Invite an Admin",
-      icon: <HiUserAdd size={22} />,
+  ] 
+    if (user?.adminUserType === "SUPER_ADMIN") {
+      sideBarItems.push({
+        path: "/Dashboard/AdminInvite",
+        name: "Invite an Admin",
+        icon: <HiUserAdd size={22} />,
+      });
     }
-  ];
 
   return (
       <div
@@ -49,9 +54,9 @@ const Sidebar = ({ openModal }) => {
             scrollbarWidth: 'none',
             msOverflowStyle: 'none',
           }}
-          className="bg-[#CCDFE6] fixed left-0 top-[5.5rem] w-[312px] h-[calc(100vh-5.5rem)] overflow-y-auto rounded-[10px] px-4 py-4 xl:block hidden scrollbar"
+          className="bg-[#CCDFE6] fixed left-0 top-[5.5rem] w-[312px] h-[calc(100vh-5.5rem)] overflow-y-auto rounded px-4 py-4 xl:block hidden scrollbar"
       >
-        <div className="space-y-[52px] flex flex-col w-full pb-20">
+        <div className="space-y-[52px] sticky flex flex-col w-full pb-20">
           <div className="flex flex-col justify-center items-center">
             <div className="mb-20">
               <img src={avatar} alt="profile image" className="w-24 h-24 rounded-full" />

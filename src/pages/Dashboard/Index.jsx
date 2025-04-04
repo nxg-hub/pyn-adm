@@ -5,6 +5,7 @@ import Navbar from "./Navbar/Navbar.jsx";
 
 const Dashboard = () => {
   return (
+    
     <div className="flex gap-82">
         <Navbar />
       <Sidebar />
