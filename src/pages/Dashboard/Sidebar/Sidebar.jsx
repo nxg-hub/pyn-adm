@@ -6,11 +6,14 @@ import { RxDashboard } from 'react-icons/rx';
 import { HiUserAdd } from 'react-icons/hi';
 import { TbSettings } from 'react-icons/tb';
 import { VscSignOut } from 'react-icons/vsc';
+import { useSelector } from 'react-redux';
 import avatar from '../../../assets/avatar.png';
 
 const Sidebar = ({ openModal }) => {
   const location = useLocation();
   const navigate = useNavigate();
+  const user = useSelector((state) => state.user.user);
+
   const currentRoute = location.pathname;
   // const [toggle, setToggle] = useState(false);
 
@@ -35,12 +38,14 @@ const Sidebar = ({ openModal }) => {
       name: "Accounts",
       icon: <MdAccountBalance size={22} />,
     },
-    {
-      path: "/Dashboard/AdminInvite",
-      name: "Invite an Admin",
-      icon: <HiUserAdd size={22} />,
+  ] 
+    if (user?.adminUserType === "SUPER_ADMIN") {
+      sideBarItems.push({
+        path: "/Dashboard/AdminInvite",
+        name: "Invite an Admin",
+        icon: <HiUserAdd size={22} />,
+      });
     }
-  ];
 
   return (
       <div
