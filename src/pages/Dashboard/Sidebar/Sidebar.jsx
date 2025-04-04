@@ -49,9 +49,9 @@ const Sidebar = ({ openModal }) => {
             scrollbarWidth: 'none',
             msOverflowStyle: 'none',
           }}
-          className="bg-[#CCDFE6] fixed left-0 top-[5.5rem] w-[312px] h-[calc(100vh-5.5rem)] overflow-y-auto rounded-[10px] px-4 py-4 xl:block hidden scrollbar"
+          className="bg-[#CCDFE6] fixed left-0 top-[5.5rem] w-[312px] h-[calc(100vh-5.5rem)] overflow-y-auto rounded px-4 py-4 xl:block hidden scrollbar"
       >
-        <div className="space-y-[52px] flex flex-col w-full pb-20">
+        <div className="space-y-[52px] sticky flex flex-col w-full pb-20">
           <div className="flex flex-col justify-center items-center">
             <div className="mb-20">
               <img src={avatar} alt="profile image" className="w-24 h-24 rounded-full" />

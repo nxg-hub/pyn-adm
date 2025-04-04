@@ -61,120 +61,161 @@ if (result.debugMessage === "User already exists") {
 
 
   return (
-    <div className="md:w-[40%] mx-10 md:mx-auto md:py-10">
-      <div className="text-center mt-10 xl:mt-0 text-white font-bold xl:text-4xl text-2xl py-10">
-        Sign Up As An Admin
+   <div className="min-h-screen flex flex-col md:flex-row bg-white">
+           <div className="md:hidden flex justify-center py-6">
+             <img src={logo} alt="Company Logo" className="h-10"/>
+           </div>
+   
+           <div
+               className="hidden md:block md:w-1/2 relative bg-cover bg-no-repeat bg-center"
+               style={{
+                 backgroundImage: "url(src/assets/images/background.png)"
+               }}
+           >
+             <div className="absolute inset-0 flex items-center justify-center">
+               <img src={logo} alt="Company Logo" className="max-w-xs" />
+             </div>
+           </div>
+   
+           <div className="w-full md:w-1/2 flex flex-col justify-center p-6 md:p-8">
+             <div className="max-w-md w-full mx-auto">
+            
       </div>
       {/* <div className="hidden md:block absolute md:top-[-13.6rem] md:right-[1rem] xl:top-[-12.5rem] xl:right-[-38.5rem]">
         <img src={logo} alt="" />
       </div> */}
       <div className="bg-white flex flex-col justify-center items-start mx-auto py-6">
-        <Formik
-          initialValues={{ email: '', firstName: '', lastName: '' , password: '', confirmPassword: '', phoneNumber: '' }}
-          validationSchema={SignUpSchema}
-          onSubmit={handleSubmit}>
-          {() => (
-            <Form className="w-full space-y-4">
-              <div className="xl:py-16 p-4 pt-[2.2rem] xl:p-10 xl:pl-[5rem] xl:pr-40 xl:w-auto w-full m-auto xl:space-y-8 space-y-4 pb-2 xl:pb-6">
-                <div className="text-[#006181] text-start font-bold xl:text-[32px] text-xl">
-                  Sign Up
-                </div>
-                <div className="xl:w-[120%] flex flex-col space-y-2">
-                  <label htmlFor="email" className="text-sm font-normal text-[#006181]">
-                    Email Address
-                  </label>
-                  <Field
-                    name="email"
-                    type="email"
-                    placeholder="Enter Email Address"
-                    className="w-full h-[3.4rem] border border-[#9ca3af] outline-none font-light text-base text-gray rounded-[5px] py-2 px-[10px]"
-                  />
-                  <ErrorMessage name="email" component="span" className="text-[#db3a3a]" />
-                </div>
-                <div className="xl:w-[120%] flex flex-col space-y-2">
-                  <label htmlFor="firstName" className="text-sm font-normal text-[#006181]">
-                    First Name
-                  </label>
-                  <Field
-                    name="firstName"
-                    type="text"
-                    placeholder="Enter First Name"
-                    className="w-full h-[3.4rem] border border-[#9ca3af] outline-none font-light text-base text-gray rounded-[5px] py-2 px-[10px]"
-                  />
-                  <ErrorMessage name="firstName" component="span" className="text-[#db3a3a]" />
-                </div>
-                <div className="xl:w-[120%] flex flex-col space-y-2">
-                  <label htmlFor="lastName" className="text-sm font-normal text-[#006181]">
-                    Last Name
-                  </label>
-                  <Field
-                    name="lastName"
-                    type="text"
-                    placeholder="Enter Last Name"
-                    className="w-full h-[3.4rem] border border-[#9ca3af] outline-none font-light text-base text-gray rounded-[5px] py-2 px-[10px]"
-                  />
-                  <ErrorMessage name="lastName" component="span" className="text-[#db3a3a]" />
-                </div>
-                <div className="xl:w-[120%] flex flex-col space-y-2">
-                  <label htmlFor="phoneNumber" className="text-sm font-normal text-[#006181]">
-                    Phone Number
-                  </label>
-                  <Field
-                    name="phoneNumber"
-                    type="text"
-                    placeholder="Enter Phone Number"
-                    className="w-full h-[3.4rem] border border-[#9ca3af] outline-none font-light text-base text-gray rounded-[5px] py-2 px-[10px]"
-                  />
-                  <ErrorMessage name="phoneNumber" component="span" className="text-[#db3a3a]" />
-                </div>
-                <div className="xl:w-[120%] flex flex-col space-y-2 relative">
-                  <label htmlFor="password" className="text-sm font-normal text-[#006181]">
-                    Password
-                  </label>
-                  <Field
-                    name="password"
-                    type={showPassword ? 'text' : 'password'}
-                    placeholder="Enter Password"
-                    className="w-full h-[3.4rem] border border-[#9ca3af] outline-none font-light text-base text-gray rounded-[5px] py-2 px-[10px]"
-                  />
-                  
-                  <ErrorMessage name="password" component="span" className="text-[#db3a3a]" />
-                  {showPassword ? (
-                    <BsEye onClick={handleShowPassword} className="absolute top-10 right-1" />
-                  ) : (
-                    <BsEyeSlash onClick={handleShowPassword} className="absolute top-10 right-1" />
-                  )}
-                
-                  </div>
-                  
-                  <div className="xl:w-[120%] flex flex-col space-y-2 relative">
-                  <label htmlFor="password2" className="text-sm font-normal text-[#006181]">
-                    Confirm Password
-                  </label>
-                  <Field
-                    name="confirmPassword"
-                    type={showPassword ? 'text' : 'password'}
-                    placeholder="Re-enter Password"
-                    className="w-full h-[3.4rem] border border-[#9ca3af] outline-none font-light text-base text-gray rounded-[5px] py-2 px-[10px]"
-                  />
-                  <ErrorMessage name="confirmPassword" component="span" className="text-[#db3a3a]" />
-                </div>
-                
+  <Formik
+    initialValues={{
+      email: '',
+      firstName: '',
+      lastName: '',
+      password: '',
+      confirmPassword: '',
+      phoneNumber: '',
+    }}
+    validationSchema={SignUpSchema}
+    onSubmit={handleSubmit}>
+    {() => (
+      <Form className="w-full space-y-4">
+         <h1 className="text-[#006181]  font-bold text-2xl md:text-3xl xl:text-4xl">
+             Sign Up As An Admin
+             </h1>
+        <div className="xl:py-16 p-4 pt-[2.2rem] xl:p-10 xl:w-auto w-full m-auto xl:space-y-8 space-y-4 pb-2 xl:pb-6">
+       
+          {/* Grid Layout for Inputs */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 xl:w-[120%]">
 
-                {errorMessage && <div className="text-[#db3a3a]">{errorMessage}</div>}
-                <button
-                  type="submit"
-                  className=" text-[#006181] mt-5 xl:text-2xl text-2xl  flex justify-center item-center rounded-md bg-yellow-400 px-6 py-3 font-bold  xl:w-[120%] mx-auto w-[100%] !mb-12 xl:my-12 xl:mb-20 hover: cursor-pointer transition"
-                  disabled={isLoading}>
-                  {isLoading ? 'Loading...' : 'Sign Up'}
-                </button>
-              </div>
+            {/* Email */}
+            <div className="flex flex-col space-y-2">
               
-            </Form>
-          )}
-        </Formik>
-      </div>
+              <label htmlFor="email" className="text-sm font-normal text-[#006181]">
+                Email Address
+              </label>
+              <Field
+                name="email"
+                type="email"
+                placeholder="Enter Email Address"
+                className="w-full h-[3.4rem] border border-[#9ca3af] outline-none font-light text-base text-gray rounded-[5px] py-2 px-[10px]"
+              />
+              <ErrorMessage name="email" component="span" className="text-[#db3a3a]" />
+            </div>
+
+            {/* First Name */}
+            <div className="flex flex-col space-y-2">
+              <label htmlFor="firstName" className="text-sm font-normal text-[#006181]">
+                First Name
+              </label>
+              <Field
+                name="firstName"
+                type="text"
+                placeholder="Enter First Name"
+                className="w-full h-[3.4rem] border border-[#9ca3af] outline-none font-light text-base text-gray rounded-[5px] py-2 px-[10px]"
+              />
+              <ErrorMessage name="firstName" component="span" className="text-[#db3a3a]" />
+            </div>
+
+            {/* Last Name */}
+            <div className="flex flex-col space-y-2">
+              <label htmlFor="lastName" className="text-sm font-normal text-[#006181]">
+                Last Name
+              </label>
+              <Field
+                name="lastName"
+                type="text"
+                placeholder="Enter Last Name"
+                className="w-full h-[3.4rem] border border-[#9ca3af] outline-none font-light text-base text-gray rounded-[5px] py-2 px-[10px]"
+              />
+              <ErrorMessage name="lastName" component="span" className="text-[#db3a3a]" />
+            </div>
+
+            {/* Phone Number */}
+            <div className="flex flex-col space-y-2">
+              <label htmlFor="phoneNumber" className="text-sm font-normal text-[#006181]">
+                Phone Number
+              </label>
+              <Field
+                name="phoneNumber"
+                type="text"
+                placeholder="Enter Phone Number"
+                className="w-full h-[3.4rem] border border-[#9ca3af] outline-none font-light text-base text-gray rounded-[5px] py-2 px-[10px]"
+              />
+              <ErrorMessage name="phoneNumber" component="span" className="text-[#db3a3a]" />
+            </div>
+
+            {/* Password */}
+            <div className="flex flex-col space-y-2 relative">
+              <label htmlFor="password" className="text-sm font-normal text-[#006181]">
+                Password
+              </label>
+              <Field
+                name="password"
+                type={showPassword ? 'text' : 'password'}
+                placeholder="Enter Password"
+                className="w-full h-[3.4rem] border border-[#9ca3af] outline-none font-light text-base text-gray rounded-[5px] py-2 px-[10px]"
+              />
+              <ErrorMessage name="password" component="span" className="text-[#db3a3a]" />
+              {showPassword ? (
+                <BsEye onClick={handleShowPassword} className="absolute top-10 right-3 cursor-pointer" />
+              ) : (
+                <BsEyeSlash onClick={handleShowPassword} className="absolute top-10 right-3 cursor-pointer" />
+              )}
+            </div>
+
+            {/* Confirm Password */}
+            <div className="flex flex-col space-y-2 relative">
+              <label htmlFor="confirmPassword" className="text-sm font-normal text-[#006181]">
+                Confirm Password
+              </label>
+              <Field
+                name="confirmPassword"
+                type={showPassword ? 'text' : 'password'}
+                placeholder="Re-enter Password"
+                className="w-full h-[3.4rem] border border-[#9ca3af] outline-none font-light text-base text-gray rounded-[5px] py-2 px-[10px]"
+              />
+              <ErrorMessage name="confirmPassword" component="span" className="text-[#db3a3a]" />
+            </div>
+
+          </div> {/* End of Grid */}
+
+          {errorMessage && <div className="text-[#db3a3a]">{errorMessage}</div>}
+
+          {/* Submit Button */}
+          <button
+            type="submit"
+            className="text-[#006181] mt-5 xl:text-2xl text-2xl flex justify-center items-center rounded-md bg-yellow-400 px-6 py-3 font-bold xl:w-[120%] mx-auto w-full !mb-12 xl:my-12 xl:mb-20 hover:cursor-pointer transition"
+            disabled={isLoading}>
+            {isLoading ? 'Loading...' : 'Sign Up'}
+          </button>
+        </div>
+      </Form>
+    )}
+  </Formik>
+</div>
+
     </div>
+    </div>
+    
   );
 };
 

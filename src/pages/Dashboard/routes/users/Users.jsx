@@ -74,8 +74,8 @@ const Users = () => {
 
 
     return (
-        <div className="container mx-auto py-6 px-4">
-            <div className="font-bold text-3xl">User Management</div>
+        <div className="container w-[75%] py-6 px-4 ml-[312px]">
+            <div className="font-bold mt-5 text-3xl">User Management</div>
 
             {/* Search Input */}
             <SearchBar className="mt-10" onSearch={handleSearch} />
@@ -116,6 +116,7 @@ const Users = () => {
                 />
             )}
         </div>
+        
     );
 };
 

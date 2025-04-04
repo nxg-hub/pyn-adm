@@ -1,5 +1,5 @@
 import React from "react";
-// import Button from "../../../../Butt/Button";
+import Button from "../../../../Buttons/Button"
 // import Breadcrumbs from "../../../../Butt/Breadcrumbs";
 // import About from "../../../../Butt/About";
 
@@ -10,7 +10,7 @@ const Accounts = () => {
 
   return (
 
-    <div>
+    <div className="ml-[312px]">
       <h1 className="text-2xl font-bold mb-4">Accounts</h1>
       <div className="flex flex-wrap gap-4">
         {/* Small Button */}

@@ -6,7 +6,7 @@ import SignUpForm from './components/signup';
 const SignUp = () => {
   return (
     <div className="bg-black h-screen overflow-x-hidden">
-      <Logo />
+      {/* <Logo /> */}
       <SignUpForm />
     </div>
   );

@@ -130,9 +130,9 @@ export function DataTable({ columns, data, onRowClick, actionColumn, showPaginat
   };
 
   return (
-    <div className="overflow-x-auto">
+    <div className="overflow-x-auto"> {/* Shift table right */}
       <div className="border border-[#e4e7ec] rounded-lg">
-        <table className="w-full">
+        <table className="w-[95%] ">
           <thead>
             <tr className="bg-white border-b border-[#e4e7ec]">
               {columns.map((column) => (
